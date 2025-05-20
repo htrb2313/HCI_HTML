@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ballsy Delight</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #ffe0b2, #ffccbc);
+    }
+
+    header.banner img {
+      width: 100%;
+      height: auto;
+      display: block;
+      max-height: 300px;
+      object-fit: cover;
+    }
+
+    nav {
+      background-color: #bf360c;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h2 {
+      border-bottom: 2px solid #d84315;
+      padding-bottom: 5px;
+      color: #d84315;
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .item {
+      background-color: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #ff7043;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #ff5722;
+    }
+
+    .cart, .support, .delivery {
+      background-color: white;
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    @media screen and (max-width: 600px) {
+      nav a {
+        display: block;
+        margin: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ✅ Banner Image Header -->
+  <header class="banner">
+    <img src="BANNER.png" alt="Ballsy Delight Banner">
+  </header>
+
+  <!-- ✅ Navigation Bar -->
+  <nav>
+    <a href="#menu">Menu</a>
+    <a href="#cart">Cart</a>
+    <a href="#support">Customer Service</a>
+    <a href="#delivery">Delivery</a>
+  </nav>
+
+  <main>
+      <!-- ✅ MENU SECTION -->
+      <section id="menu" class="menu">
+        <h2 style="text-align:center;">
+          <img src="menu.png" alt="Menu Icon" style="height:310px;">
+        </h2>
+        
+    
+        <div class="item">
+          <img src="carrot-ball.jpg" alt="Ballsy Bites">
+          <h3>Ballsy Bites</h3>
+          <p>₱6.00 each</p>
+          <input type="number" id="qty-bites" min="1" max="20" value="1">
+          <button onclick="addItemWithQty('Ballsy Bites', 6, 'qty-bites')">Add to Cart</button>
+        </div>
+    
+        <div class="item">
+          <img src="fries.jpg" alt="Fries">
+          <h3>Fries</h3>
+          <select id="fries-size">
+            <option value="25">Small – ₱25.00</option>
+            <option value="35">Medium – ₱35.00</option>
+            <option value="50">Large – ₱50.00</option>
+            <option value="70">Extra Large – ₱70.00</option>
+            <option value="85">Extra Extra Large – ₱85.00</option>
+          </select>
+          <button onclick="addFries()">Add to Cart</button>
+        </div>
+    
+        <div class="item">
+          <img src="siomai.jpg" alt="Siomai">
+          <h3>Siomai</h3>
+          <p>₱6.00 each</p>
+          <input type="number" id="qty-siomai" min="1" max="20" value="1">
+          <button onclick="addItemWithQty('Siomai', 6, 'qty-siomai')">Add to Cart</button>
+        </div>
+    
+        <div class="item">
+          <img src="lumpiua.jpg" alt="Lumpia">
+          <h3>Lumpia</h3>
+          <p>₱6.00 each</p>
+          <input type="number" id="qty-lumpia" min="1" max="20" value="1">
+          <button onclick="addItemWithQty('Lumpia', 6, 'qty-lumpia')">Add to Cart</button>
+        </div>
+    
+        <div class="item">
+          <img src="shanghai.jpg" alt="Shanghai">
+          <h3>Shanghai</h3>
+          <p>₱6.00 each</p>
+          <input type="number" id="qty-shanghai" min="1" max="20" value="1">
+          <button onclick="addItemWithQty('Shanghai', 6, 'qty-shanghai')">Add to Cart</button>
+        </div>
+      </section>
+
+      <section id="checkout-details" class="cart">
+        <h2>Checkout Details</h2>
+      
+        <label for="payment-method"><strong>Select Payment Method:</strong></label><br/>
+        <select id="payment-method" required>
+          <option value="GCASH">GCASH</option>
+          <option value="Cash on Delivery">Cash on Delivery</option>
+          <option value="Bank Card">Bank Card</option>
+        </select><br/><br/>
+      
+        <label for="address"><strong>Delivery Address:</strong></label><br/>
+        <textarea id="address" rows="3" placeholder="Enter your full delivery address..." required style="width: 100%; padding: 8px;"></textarea><br/><br/>
+        <label for="address"><strong>Contact Number:</strong></label><br/>
+        <textarea id="address" rows="3" placeholder="Enter your Contact Number..." required style="width: 100%; padding: 8px;"></textarea><br/><br/>
+        <div id="gcash-qr" style="display: none; margin-top: 15px; text-align: center;">
+          <p><strong>Scan to Pay via GCash:</strong></p>
+          <img src="GCASH.png" alt="GCASH QR Code" style="max-width: 200px;">
+          <p><small>Receiver: <strong>Jed Razon</strong></small></p>
+        </div>
+        
+        <div id="bank-card-fields" style="display: none; margin-top: 15px;">
+          <label for="card-number"><strong>Card Number:</strong></label><br/>
+          <input type="text" id="card-number" maxlength="19" placeholder="1234 5678 9012 3456" style="width:100%; padding: 8px;"><br/><br/>
+        
+          <label for="card-expiry"><strong>Expiry Date:</strong></label><br/>
+          <input type="text" id="card-expiry" maxlength="5" placeholder="MM/YY" style="width:100%; padding: 8px;"><br/><br/>
+        
+          <label for="card-cvv"><strong>CVV:</strong></label><br/>
+          <input type="text" id="card-cvv" maxlength="3" placeholder="123" style="width:100%; padding: 8px;">
+        </div>
+      </section>
+      
+      <!-- ✅ CART SECTION -->
+      <section id="cart" class="cart">
+        <h2>Your Cart</h2>
+        <ul id="cart-items"></ul>
+        <p><strong>Total: P<span id="total">0</span></strong></p>
+        <button onclick="checkout()">Checkout</button>
+      </section>
+    
+      <!-- ✅ SUPPORT SECTION -->
+      <section id="support" class="support">
+        <h2>Customer Service</h2>
+        <p>Need help with your order?</p>
+        <button onclick="alert('Redirecting to customer service...')">Report a Problem</button>
+    </div>
+  
+      </section>
+    
+      <!-- ✅ DELIVERY SECTION -->
+      <section id="delivery" class="delivery">
+        <h2>Delivery Info</h2>
+        <p>We deliver anywhere in Bayombong within 30–45 minutes. Delivery is free for orders above P100!</p>
+      </section>
+    </main>
+    
+    <!-- ✅ SCRIPT SECTION -->
+    <script>
+      let cart = [];
+      let total = 0;
+    
+      function addItemWithQty(name, unitPrice, qtyInputId) {
+        const qty = parseInt(document.getElementById(qtyInputId).value);
+        if (qty > 0 && qty <= 20) {
+          const itemTotal = unitPrice * qty;
+          cart.push({ item: `${name} x${qty}`, price: itemTotal });
+          total += itemTotal;
+          updateCart();
+        } else {
+          alert("Please enter a quantity between 1 and 20.");
+        }
+      }
+    
+      function addFries() {
+        const sizeDropdown = document.getElementById("fries-size");
+        const price = parseInt(sizeDropdown.value);
+        const label = sizeDropdown.options[sizeDropdown.selectedIndex].text;
+        cart.push({ item: `Fries (${label})`, price: price });
+        total += price;
+        updateCart();
+      }
+    
+      function updateCart() {
+      const cartItems = document.getElementById("cart-items");
+      cartItems.innerHTML = "";
+      cart.forEach((entry, index) => {
+      const li = document.createElement("li");
+      li.innerHTML = `${entry.item} - P${entry.price} 
+      <button style="margin-left: 10px; background-color: red;" onclick="removeFromCart(${index})">Remove</button>`;
+      cartItems.appendChild(li);
+      });
+      document.getElementById("total").textContent = total;
+      }
+
+      function removeFromCart(index) {
+      total -= cart[index].price;
+      cart.splice(index, 1);
+      updateCart();
+      }
+    
+      document.getElementById("payment-method").addEventListener("change", function () {
+        const method = this.value;
+        document.getElementById("gcash-qr").style.display = method === "GCASH" ? "block" : "none";
+        document.getElementById("bank-card-fields").style.display = method === "Bank Card" ? "block" : "none";
+      });
+    
+      function checkout() {
+        const paymentMethod = document.getElementById("payment-method").value;
+        const address = document.getElementById("address").value.trim();
+    
+        if (cart.length === 0) {
+          alert("Your cart is empty!");
+          return;
+        }
+    
+        if (!address) {
+          alert("Please enter your delivery address.");
+          return;
+        }
+    
+        if (!address) {
+          alert("Please enter your Contact Number.");
+          return;
+        }
+        if (paymentMethod === "Bank Card") {
+          const cardNumber = document.getElementById("card-number").value.trim();
+          const expiry = document.getElementById("card-expiry").value.trim();
+          const cvv = document.getElementById("card-cvv").value.trim();
+    
+          if (!cardNumber || !expiry || !cvv) {
+            alert("Please complete all bank card fields.");
+            return;
+          }
+        }
+    
+        let summary = "🛒 Order Summary:\n";
+        cart.forEach(entry => {
+          summary += `- ${entry.item} - P${entry.price}\n`;
+        });
+    
+        summary += `\nTotal: P${total}\nPayment Method: ${paymentMethod}\nDelivery Address: ${address}`;
+        alert(summary);
+    
+        // Reset
+        cart = [];
+        total = 0;
+        updateCart();
+        document.getElementById("address").value = "";
+        document.getElementById("payment-method").selectedIndex = 0;
+        document.getElementById("gcash-qr").style.display = "none";
+        document.getElementById("bank-card-fields").style.display = "none";
+        document.getElementById("card-number").value = "";
+        document.getElementById("card-expiry").value = "";
+        document.getElementById("card-cvv").value = "";
+
+}
+    </script>
+
+    
